@@ -11,6 +11,11 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@palawan-site-engine/engine": "workspace:*",
+    "@palawan-site-engine/schemas": "workspace:*",
+    "@palawan-site-engine/sections": "workspace:*",
+    "@palawan-site-engine/templates": "workspace:*",
+    "@palawan-site-engine/themes": "workspace:*",
     "next": "16.4.5",
     "react": "19.3.1",
     "react-dom": "19.3.1"

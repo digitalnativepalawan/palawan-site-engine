@@ -1,25 +1,32 @@
 {
-    "scripts":  {
-                    "test":  "vitest run src",
-                    "build":  "tsc -p tsconfig.json --noEmit",
-                    "typecheck":  "tsc -p tsconfig.json --noEmit",
-                    "lint":  "eslint . --max-warnings=0"
-                },
-    "type":  "module",
-    "types":  "./src/index.ts",
-    "version":  "0.0.0",
-    "devDependencies":  {
-                            "vitest":  "^5.1.0",
-                            "eslint":  "^10.14.0",
-                            "typescript":  "^5.9.3",
-                            "globals":  "^17.14.0",
-                            "typescript-eslint":  "^8.72.1",
-                            "@eslint/js":  "^10.0.0"
-                        },
-    "name":  "@palawan-site-engine/sections",
-    "private":  true,
-    "exports":  {
-                    ".":  "./src/index.ts"
-                },
-    "main":  "./src/index.ts"
+  "name": "@palawan-site-engine/sections",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.tsx",
+  "types": "./src/index.tsx",
+  "exports": {
+    ".": "./src/index.tsx"
+  },
+  "scripts": {
+    "lint": "eslint . --max-warnings=0",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run src",
+    "build": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@palawan-site-engine/schemas": "workspace:*",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.0",
+    "@types/react": "^19.2.7",
+    "@vitejs/plugin-react": "^6.2.1",
+    "eslint": "^10.14.0",
+    "globals": "^17.14.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.72.1",
+    "vitest": "^5.1.0"
+  }
 }

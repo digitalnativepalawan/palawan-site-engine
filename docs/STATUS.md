@@ -3,68 +3,72 @@
 Source of truth for BUILT / NOT BUILT / KNOWN ISSUES / UNVERIFIED.
 Updated each phase. If something is not listed under BUILT, it is not done.
 
-Last updated: Phase 0 bootstrap (2026-11-08).
+Last updated: Phase 1 complete (2026-11-08).
 
-## BUILT (Phase 0)
+## BUILT (Phase 1)
 
-- Monorepo scaffold: pnpm workspaces + Turborepo 2; `apps/web`, `apps/studio`,
-  `packages/{schemas,sections,themes,templates,engine,modules,integrations}`,
-  `docs/`, `scripts/`, `infrastructure/docker/`, `.env.example`.
-- Tooling: ESLint 10 (flat config), Prettier 3, Vitest 5, Playwright 1 (config only),
-  Zod 4 (dependency in `packages/schemas`), TypeScript 5 strict everywhere.
-- `apps/web` and `apps/studio`: minimal Next.js 16 App Router shells that build
-  (`next build`). No site rendering, no CMS, no auth yet.
-- Each package: minimal typed `src/index.ts` + Vitest smoke test that passes.
-  These prove wiring only; they are not feature implementations.
-- Root `AGENTS.md` with the 10 standing rules; this STATUS; root README;
-  `.env.example` documenting every reserved variable.
-- CI: `.github/workflows/ci.yml` runs install, lint, typecheck, test, build.
-- Reference: `docs/reference/amihan.html` (sunrise resort preview, Phase 1 hero reference)
-  and `docs/reference/palawan-site-engine-prompts.md` (9-phase build plan).
+- **Schemas (`packages/schemas`):** `BusinessProfile`, `SiteManifest`, `AppConfig`,
+  section config schemas with defaults, `TemplateDefinition` (image-slot min/max +
+  copyLimits + requiresVerified). Every factual field carries
+  `{ value, status: verified|unverified|assumed, source? }`. Zod 4, strict TS.
+- **Themes (`packages/themes`):** CSS-variable token system; 3 palettes
+  (lagoon, ember, moss) and 3 font pairs (editorial, contemporary, minimal);
+  runtime switching via `data-palette`/`data-fontpair` + inline CSS vars.
+  Fonts loaded via `next/font` in `apps/web`.
+- **Sections (`packages/sections`):** 13 components, one file per section:
+  Navigation (mobile menu), Hero (scroll-sunrise + split-image), Statement,
+  Rooms, Amenities, Gallery, Experiences (details), Testimonial, Location,
+  InquiryForm (UI only, posts nowhere), FAQ, CTA, Footer. Typed configs,
+  defaults, responsive, accessible, theme-driven.
+- **Engine (`packages/engine`):** `validateSite(profile, manifest, appConfig, template)`
+  checks all 7 required rules — missing fields, over-length copy, image-slot
+  counts, broken internal links, empty SEO, invalid section config, unverified
+  facts where verified required — plus module-disabled guard. `resolveImageSlots`
+  enforces min/max per slot (works with SVG placeholders and real photo URLs).
+- **Template (`packages/templates`):** `resort-01` cinematic dawn (original design
+  derived from `docs/reference/amihan.html`), 7 pages
+  (home, rooms, amenities, gallery, location, about, contact). Two FICTIONAL demo
+  profiles: Amihan (3 rooms, 4 gallery) and Sibuyan (5 rooms, 6 gallery),
+  different palettes/copy lengths. Generated SVG scenes labeled FICTIONAL in
+  `apps/web/public/images/`.
+- **Web app (`apps/web`):** static generation (`generateStaticParams`, SSG `●`
+  for all 14 site pages + `/templates`), `/templates` gallery, site pages at
+  `/sites/[siteId]/[slug]`, runtime palette/profile/font switcher dock,
+  `/api/validate` POST endpoint.
+- **Tests:** Vitest `pnpm test` → 7 packages, 23 tests (schemas, engine rules,
+  slot resolution, sections, themes, templates). Playwright `tests/e2e/site.spec.ts`
+  → 14 tests: both sites × 390/1440 on Home/Rooms/Contact (screenshots in
+  `docs/screenshots/`, 12 PNGs), no horizontal overflow, axe zero serious/critical,
+  all 7 pages render, palette/profile switch works.
 
 ## NOT BUILT
 
-- **Engine (Phase 1):** validation (missing fields, over-length copy, image-slot
-  counts, broken links, empty SEO, invalid section config, unverified-fact checks),
-  image-slot resolution, page rendering from manifest. `packages/engine` is a stub.
-- **Schemas (Phase 1):** `BusinessProfile`, `SiteManifest`, `AppConfig`, section
-  config schemas, per-field maxLength, per-slot image min/max. `packages/schemas`
-  has only a health check; full schemas are NOT BUILT.
-- **Themes (Phase 1):** token system, 3 palettes, 3 font pairs, runtime switching.
-  `packages/themes` is a stub.
-- **Sections (Phase 1):** Navigation, Hero (+ variants), Statement, Rooms, Amenities,
-  Gallery, Experiences, Testimonial, Location, Inquiry form (UI only), FAQ, CTA,
-  Footer. `packages/sections` is a stub. (Announcement bar, Video hero, Storytelling,
-  Services, Room details, Pricing, Booking form also land in Phase 7.)
-- **Templates (Phase 1):** `resort-01` cinematic dawn. Batches 8A–8D (19 more templates,
-  20 total) are NOT BUILT.
-- **Demo sites (Phase 1):** two FICTIONAL resort profiles, `/templates` gallery,
-  7 pages per site, screenshots at 390px/1440px, axe checks. NOT BUILT.
 - **Studio + CMS (Phase 2):** Payload 3 + PostgreSQL, collections, roles, RLS,
-  media on S3/R2, audit log, seed script, DB-backed rendering in `apps/web`. NOT BUILT.
-- **Modules (Phase 3, 7):** module registry, inquiry, booking-requests, restaurant,
-  tour, blog, reviews, email adapters, client CMS at `/client`. NOT BUILT.
+  media on S3/R2, audit log, seed script, DB-backed rendering. NOT BUILT.
+  (`apps/studio` is still the Phase 0 shell.)
+- **Modules (Phase 3, 7):** module registry, inquiry delivery, booking-requests,
+  restaurant/tour/blog/reviews, email adapters, client CMS at `/client`. NOT BUILT.
+  (Inquiry form is UI only; `AppConfig` modules schema exists.)
 - **Puck editor (Phase 4), SEO + deploy providers (Phase 5), Hermes tools (Phase 6),
-  template batches (Phase 8), hardening (Phase 9):** NOT BUILT.
+  template batches (Phase 8, 19 more templates), hardening (Phase 9):** NOT BUILT.
+- **Sections Phase 7:** Announcement bar, Video hero, Storytelling, Services,
+  Room details, Pricing, Booking form. NOT BUILT.
+- **Production photos:** demo images are SVG placeholders. Real client photos
+  must replace them before any commercial use (slots already accept real URLs).
 
-## KNOWN ISSUES (Phase 0)
+## KNOWN ISSUES (Phase 1)
 
-- Playwright config exists; no e2e tests run yet (they start in Phase 1 with screenshots).
-  `pnpm test` runs Vitest only.
-- Next.js 16 + TypeScript 5.9 pinned deliberately (TypeScript 7.0.2 is latest on npm
-  but unproven against Next 16.4.5; switch only after a clean `pnpm build`).
-- `@types/node` pinned to `^24.0.0` to match the Node 24 runtime (npm latest is 26.x).
-  Revisit with the runtime.
-- Turborepo build outputs are `.next/**` and `dist/**`; package builds are
-  typecheck-only in Phase 0 (no emitted artifacts). This is intentional until Phase 1.
-- **GitHub Actions CI is blocked:** `gh run view` reports
-  "The job was not started because your account is locked due to a billing issue"
-  (run 42436320917). Local gate passes; remote CI is UNVERIFIED until billing is resolved.
+- GitHub Actions CI remains **UNVERIFIED**: runs `42436320917` /
+  `42436461812` report *"your account is locked due to a billing issue"*
+  (GitHub-side annotation, not repo code). `.github/workflows/ci.yml` is correct
+  and local `pnpm lint/typecheck/test/build` pass; remote CI cannot run until
+  the account lock is cleared in GitHub settings.
+- Package `build` scripts remain typecheck-only (`tsc --noEmit`); Turborepo
+  warns about missing outputs. Intentional until later phases emit artifacts.
+- `pnpm test` runs Vitest only; Playwright runs separately via
+  `npx playwright test` (needs `pnpm --filter web build` + `playwright install`).
 
 ## UNVERIFIED
 
-- Phase 0 gate (install/lint/typecheck/test/build from clean clone) is verified
-  locally at bootstrap (`C:\dev\tmp-pse-clean` clone, 2026-11-08). GitHub Actions CI
-  status is UNVERIFIED — blocked by the billing lock above, not by code.
-- Vercel deploy, Payload, Puck, and Hermes paths are UNVERIFIED by definition until
-  their phases.
+- Phase 1 gates verified locally (see command outputs in Phase 1 report).
+  Remote CI, Vercel deploy, Payload, Puck, Hermes: UNVERIFIED.

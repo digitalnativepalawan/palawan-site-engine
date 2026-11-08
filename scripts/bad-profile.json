@@ -1,0 +1,16 @@
+{
+  "id": "bad-demo",
+  "name": { "value": "Bad Demo (FICTIONAL)", "status": "verified" },
+  "industry": "resort",
+  "tagline": { "value": "This tagline is deliberately far too long. It repeats the same phrase over and over so the engine validator must reject it for exceeding the 120 character limit declared in the template definition. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.", "status": "verified" },
+  "description": { "value": "Deliberately bad demo profile for validator checks. (FICTIONAL)", "status": "verified" },
+  "location": { "value": { "address": "Nowhere (FICTIONAL)", "city": "Nowhere", "region": "Nowhere", "country": "Nowhere" }, "status": "unverified" },
+  "contact": { "value": { "email": "bad@bad.example", "phone": "+63 900 000 0000" }, "status": "verified" },
+  "hours": { "value": { "timezone": "Asia/Manila", "lines": [{ "day": "Daily", "open": "07:00", "close": "22:00" }] }, "status": "verified" },
+  "socials": { "value": {}, "status": "verified" },
+  "services": { "value": [{ "name": "Bad service", "description": "Bad. (FICTIONAL)" }], "status": "verified" },
+  "rooms": { "value": [{ "name": "Bad room", "description": "Bad. (FICTIONAL)", "sleeps": 2 }], "status": "verified" },
+  "amenities": { "value": [{ "name": "Bad amenity", "description": "Bad. (FICTIONAL)" }], "status": "verified" },
+  "images": { "value": { "hero": [], "rooms": [], "gallery": [] }, "status": "verified" },
+  "seo": { "value": { "title": "", "description": "" }, "status": "verified" }
+}
