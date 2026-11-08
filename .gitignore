@@ -1,0 +1,32 @@
+# dependencies
+node_modules
+.pnpm-store
+
+# builds
+.next
+out
+dist
+*.tsbuildinfo
+
+# env
+.env
+.env.local
+.env.*.local
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# test / coverage
+coverage
+test-results
+playwright-report
+playwright/cache
+
+# misc
+.DS_Store
+.turbo
+Thumbs.db
+*.swp
+*.swo

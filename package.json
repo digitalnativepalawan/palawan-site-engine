@@ -1,0 +1,29 @@
+{
+  "name": "palawan-site-engine",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Palawan Site Engine — a website factory that renders full client sites from validated inputs. Fictional demo data only; no real client data, ever.",
+  "packageManager": "pnpm@10.30.3",
+  "engines": {
+    "node": ">=20.9.0",
+    "pnpm": ">=10.0.0"
+  },
+  "scripts": {
+    "dev": "turbo run dev --filter=web --filter=studio",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "format": "prettier --write \"**/*.{js,ts,tsx,md,json,yaml,yml}\"",
+    "format:check": "prettier --check \"**/*.{js,ts,tsx,md,json,yaml,yml}\""
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.0",
+    "eslint": "^10.14.0",
+    "globals": "^17.14.0",
+    "prettier": "^3.9.10",
+    "turbo": "^2.11.10",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.72.1"
+  }
+}

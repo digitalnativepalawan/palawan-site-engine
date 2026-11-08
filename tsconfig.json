@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "composite": false
+  },
+  "include": [],
+  "references": [
+    { "path": "./apps/web" },
+    { "path": "./apps/studio" },
+    { "path": "./packages/schemas" },
+    { "path": "./packages/sections" },
+    { "path": "./packages/themes" },
+    { "path": "./packages/templates" },
+    { "path": "./packages/engine" },
+    { "path": "./packages/modules" },
+    { "path": "./packages/integrations" }
+  ]
+}

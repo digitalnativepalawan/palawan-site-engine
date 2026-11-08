@@ -1,0 +1,25 @@
+{
+    "scripts":  {
+                    "test":  "vitest run src",
+                    "build":  "tsc -p tsconfig.json --noEmit",
+                    "typecheck":  "tsc -p tsconfig.json --noEmit",
+                    "lint":  "eslint . --max-warnings=0"
+                },
+    "type":  "module",
+    "types":  "./src/index.ts",
+    "version":  "0.0.0",
+    "devDependencies":  {
+                            "vitest":  "^5.1.0",
+                            "eslint":  "^10.14.0",
+                            "typescript":  "^5.9.3",
+                            "globals":  "^17.14.0",
+                            "typescript-eslint":  "^8.72.1",
+                            "@eslint/js":  "^10.0.0"
+                        },
+    "name":  "@palawan-site-engine/sections",
+    "private":  true,
+    "exports":  {
+                    ".":  "./src/index.ts"
+                },
+    "main":  "./src/index.ts"
+}
