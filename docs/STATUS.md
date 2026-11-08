@@ -57,11 +57,14 @@ Last updated: Phase 0 bootstrap (2026-11-08).
   Revisit with the runtime.
 - Turborepo build outputs are `.next/**` and `dist/**`; package builds are
   typecheck-only in Phase 0 (no emitted artifacts). This is intentional until Phase 1.
+- **GitHub Actions CI is blocked:** `gh run view` reports
+  "The job was not started because your account is locked due to a billing issue"
+  (run 42436320917). Local gate passes; remote CI is UNVERIFIED until billing is resolved.
 
 ## UNVERIFIED
 
-- Phase 0 gate (install/lint/typecheck/test/build from clean clone + CI) is verified
-  locally at bootstrap. GitHub Actions CI status is UNVERIFIED until the first push
-  to `main` runs green.
+- Phase 0 gate (install/lint/typecheck/test/build from clean clone) is verified
+  locally at bootstrap (`C:\dev\tmp-pse-clean` clone, 2026-11-08). GitHub Actions CI
+  status is UNVERIFIED — blocked by the billing lock above, not by code.
 - Vercel deploy, Payload, Puck, and Hermes paths are UNVERIFIED by definition until
   their phases.
